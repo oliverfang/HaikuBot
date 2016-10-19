@@ -1,7 +1,8 @@
-from lxml import html
 import requests
 import sys
+import re
 from pprint import pprint
+from lxml import html
 
 
 def getSyllables(word):
@@ -17,7 +18,9 @@ def getSyllables(word):
 	# convert to string and parse
 	try:
 		syllable_str = syllable[0].encode('ascii', 'replace')
-		syllables = syllable_str.split('?')
+
+		# print syllable_str; checks for hyphenated words
+		syllables = re.split('[?-]', syllable_str)
 
 		# return length
 		return len(syllables)
